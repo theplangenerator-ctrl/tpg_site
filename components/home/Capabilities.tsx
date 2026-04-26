@@ -125,23 +125,42 @@ export default function Capabilities() {
           },
         })
 
-        // Marquees — continuous, opposite directions
-        gsap.to('[data-marquee-1]', {
+        // Endless marquees — opposite directions, scroll-velocity reactive.
+        const m1 = gsap.to('[data-marquee-1]', {
           xPercent: -50,
-          duration: 38,
+          duration: 18,
           ease: 'none',
           repeat: -1,
         })
-        gsap.fromTo(
+        const m2 = gsap.fromTo(
           '[data-marquee-2]',
           { xPercent: -50 },
-          {
-            xPercent: 0,
-            duration: 44,
-            ease: 'none',
-            repeat: -1,
-          }
+          { xPercent: 0, duration: 18, ease: 'none', repeat: -1 }
         )
+
+        // quickTo = low-latency timeScale updates (no per-frame tween allocation)
+        const setTS1 = gsap.quickTo(m1, 'timeScale', { duration: 0.3, ease: 'power2.out' })
+        const setTS2 = gsap.quickTo(m2, 'timeScale', { duration: 0.3, ease: 'power2.out' })
+
+        let dir = 1
+        let decay: gsap.core.Tween | null = null
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            dir = -self.direction
+            const boost = gsap.utils.clamp(0, 5, Math.abs(self.getVelocity()) / 500)
+            const t = dir * (1 + boost)
+            setTS1(t)
+            setTS2(-t)
+            decay?.kill()
+            decay = gsap.delayedCall(0.2, () => {
+              setTS1(dir)
+              setTS2(-dir)
+            })
+          },
+        })
       }, sectionRef)
 
       return () => ctx.revert()
@@ -201,7 +220,7 @@ export default function Capabilities() {
                   style={{
                     fontSize: 'clamp(3rem, 9vw, 8rem)',
                     color: 'transparent',
-                    WebkitTextStroke: '1px #2a2a2a',
+                    WebkitTextStroke: '2px #6a6a6a',
                   }}
                 >
                   What We Build —
