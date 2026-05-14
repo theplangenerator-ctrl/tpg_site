@@ -1,10 +1,12 @@
 'use client'
 
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { MaskedReveal } from '@/components/motion/MaskedReveal'
 import { useIsMobile } from '@/hooks/useIsMobile'
+
+const VIDEO_SRC = '/kiosk.mp4'
 
 const FRAMES = [
   { src: '/images/kiosk/01.jpg', code: 'TOUCH', body: 'Authenticate in under a second. No app, no QR.' },
@@ -14,29 +16,53 @@ const FRAMES = [
   { src: '/images/kiosk/05.avif', code: 'REST', body: 'Logs out. Ready for the next member on the floor.' },
 ]
 
-const AUTO_ADVANCE_MS = 5200
+type Active = number | 'video'
 
 export function KioskFilm() {
   const ref = useRef<HTMLElement | null>(null)
+  const videoRef = useRef<HTMLVideoElement | null>(null)
   const isMobile = useIsMobile()
-  const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
+  const [active, setActive] = useState<Active>('video')
+  const [muted, setMuted] = useState(true)
+
+  const showingVideo = active === 'video'
+  const currentFrame = showingVideo ? null : FRAMES[active as number]
+  const frameLabel = showingVideo ? 'FILM' : String((active as number) + 1).padStart(2, '0')
+  const frameCode = showingVideo ? 'KIOSK_01' : currentFrame!.code
+  const totalLabel = String(FRAMES.length).padStart(2, '0')
+
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = muted
+    if (!muted) {
+      v.play().catch(() => setMuted(true))
+    }
+  }, [muted])
+
+  useEffect(() => {
+    if (!showingVideo) return
+    const v = videoRef.current
+    if (!v) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          v.play().catch(() => {})
+        } else {
+          v.pause()
+        }
+      },
+      { threshold: 0.25 },
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [showingVideo])
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
   const lift = useTransform(scrollYProgress, [0, 1], ['4%', '-4%'])
-
-  useEffect(() => {
-    if (paused) return
-    const id = window.setInterval(() => {
-      setActive((i) => (i + 1) % FRAMES.length)
-    }, AUTO_ADVANCE_MS)
-    return () => window.clearInterval(id)
-  }, [paused])
-
-  const current = FRAMES[active]
-  const frameLabel = String(active + 1).padStart(2, '0')
 
   return (
     <section
@@ -50,7 +76,7 @@ export function KioskFilm() {
         <div className="col-span-12 md:col-span-3">
           <span className="label-mono text-paper/60 block mb-3">GALLERY · KIOSK_01</span>
           <p className="text-sm text-paper/65 max-w-[26ch]">
-            Five frames of the hardware doing what it was built for.
+            The film plays by default. Tap a frame to inspect a still.
           </p>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -69,48 +95,127 @@ export function KioskFilm() {
           <div className="md:sticky md:top-24">
             <motion.div
               style={isMobile ? undefined : { y: lift }}
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
               className="relative aspect-video bg-graphite-500 border border-paper/15 overflow-hidden"
             >
               <AnimatePresence mode="sync">
-                <motion.div
-                  key={current.src}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-                  className="absolute inset-0"
-                >
-                  <Image
-                    src={current.src}
-                    alt={`Kiosk frame ${frameLabel} — ${current.code}`}
-                    fill
-                    sizes="(min-width: 768px) 66vw, 100vw"
-                    className="object-cover"
-                    priority={active === 0}
-                  />
-                </motion.div>
+                {showingVideo ? (
+                  <motion.div
+                    key="video"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+                    className="absolute inset-0"
+                  >
+                    <video
+                      ref={videoRef}
+                      src={VIDEO_SRC}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={currentFrame!.src}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={currentFrame!.src}
+                      alt={`Kiosk frame ${frameLabel} — ${currentFrame!.code}`}
+                      fill
+                      sizes="(min-width: 768px) 66vw, 100vw"
+                      className="object-cover"
+                    />
+                  </motion.div>
+                )}
               </AnimatePresence>
 
               {/* Subtle vignette so labels stay readable */}
               <div className="absolute inset-0 pointer-events-none [background:linear-gradient(180deg,rgba(0,0,0,0.18)_0%,transparent_22%,transparent_70%,rgba(0,0,0,0.32)_100%)]" />
 
               {/* Corner labels */}
-              <div className="absolute top-2 left-2 md:top-3 md:left-3 label-micro text-paper/80">FRAME · {frameLabel}</div>
+              <div className="absolute top-2 left-2 md:top-3 md:left-3 label-micro text-paper/80">
+                {showingVideo ? 'FILM · KIOSK_01' : `FRAME · ${frameLabel}`}
+              </div>
               <div className="absolute top-2 right-2 md:top-3 md:right-3 label-micro text-signal animate-pulse-signal">● LIVE</div>
-              <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 label-micro text-paper/80">{current.code}</div>
-              <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 label-micro text-paper/80">{frameLabel} / {String(FRAMES.length).padStart(2, '0')}</div>
+              <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 label-micro text-paper/80">{frameCode}</div>
+              {!showingVideo && (
+                <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 label-micro text-paper/80">
+                  {frameLabel} / {totalLabel}
+                </div>
+              )}
+
+              {/* Mute toggle — only when video is playing */}
+              {showingVideo && (
+                <button
+                  type="button"
+                  onClick={() => setMuted((m) => !m)}
+                  aria-label={muted ? 'Unmute film' : 'Mute film'}
+                  aria-pressed={!muted}
+                  className="absolute bottom-2 right-2 md:bottom-3 md:right-3 label-micro text-paper hover:text-signal transition-colors px-2 py-1 border border-paper/30 hover:border-signal/60 bg-graphite-500/50 backdrop-blur-sm flex items-center gap-1.5"
+                >
+                  <span aria-hidden>{muted ? '🔇' : '🔊'}</span>
+                  <span>{muted ? 'UNMUTE' : 'MUTE'}</span>
+                </button>
+              )}
+
+              {/* Return-to-film overlay control when viewing a still */}
+              {!showingVideo && (
+                <button
+                  type="button"
+                  onClick={() => setActive('video')}
+                  aria-label="Return to film"
+                  className="absolute top-2 right-12 md:top-3 md:right-16 label-micro text-paper/80 hover:text-signal transition-colors px-2 py-1 border border-paper/20 hover:border-signal/60 bg-graphite-500/40 backdrop-blur-sm"
+                >
+                  ▶ PLAY FILM
+                </button>
+              )}
             </motion.div>
 
-            {/* Thumbnail strip */}
-            <div
-              className="mt-3 grid grid-cols-5 gap-2 md:gap-3"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
+            {/* Thumbnail strip — film first, then stills */}
+            <div className="mt-3 grid grid-cols-6 gap-2 md:gap-3">
+              <button
+                type="button"
+                onClick={() => setActive('video')}
+                aria-label="Show film"
+                aria-pressed={showingVideo}
+                className={`relative aspect-[4/3] overflow-hidden border transition-colors min-h-[44px] ${
+                  showingVideo
+                    ? 'border-signal'
+                    : 'border-paper/15 hover:border-paper/50'
+                }`}
+              >
+                <video
+                  src={VIDEO_SRC}
+                  muted
+                  loop
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity ${
+                    showingVideo ? 'opacity-100' : 'opacity-55 hover:opacity-85'
+                  }`}
+                />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="label-micro text-paper bg-graphite-500/60 px-1.5 py-0.5 backdrop-blur-sm">▶ FILM</span>
+                </span>
+                <span
+                  aria-hidden
+                  className={`absolute bottom-0 left-0 right-0 h-[2px] transition-colors ${
+                    showingVideo ? 'bg-signal' : 'bg-transparent'
+                  }`}
+                />
+              </button>
               {FRAMES.map((f, i) => {
-                const isActive = i === active
+                const isActive = !showingVideo && i === active
                 return (
                   <button
                     key={f.src}
@@ -128,7 +233,7 @@ export function KioskFilm() {
                       src={f.src}
                       alt=""
                       fill
-                      sizes="(min-width: 768px) 13vw, 20vw"
+                      sizes="(min-width: 768px) 11vw, 16vw"
                       className={`object-cover transition-opacity ${
                         isActive ? 'opacity-100' : 'opacity-55 hover:opacity-85'
                       }`}
@@ -145,7 +250,7 @@ export function KioskFilm() {
             </div>
 
             <div className="mt-3 flex items-baseline justify-between label-mono text-paper/60">
-              <span>FOOTAGE · STILLS</span>
+              <span>{showingVideo ? 'FOOTAGE · FILM' : 'FOOTAGE · STILLS'}</span>
               <span className="text-steel">REV · 0.7</span>
             </div>
           </div>
@@ -154,7 +259,7 @@ export function KioskFilm() {
         {/* Timestamped notes — scroll past the pinned frame */}
         <ol className="col-span-12 md:col-span-4 md:pl-8 mt-8 md:mt-0 space-y-4 md:space-y-6">
           {FRAMES.map((f, i) => {
-            const isActive = i === active
+            const isActive = !showingVideo && i === active
             return (
               <motion.li
                 key={f.code}
@@ -166,11 +271,9 @@ export function KioskFilm() {
                   delay: i * 0.05,
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                onMouseEnter={() => {
-                  setPaused(true)
-                  setActive(i)
-                }}
-                onMouseLeave={() => setPaused(false)}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive('video')}
+                onClick={() => setActive(i)}
                 className={`border-t pt-4 md:pt-5 transition-colors cursor-pointer ${
                   isActive ? 'border-signal' : 'border-paper/15'
                 }`}
