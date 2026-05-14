@@ -1,34 +1,29 @@
-import type { Metadata } from 'next'
-import Hero from '@/components/home/Hero'
-import Catalogue from '@/components/home/Catalogue'
-import Capabilities from '@/components/home/Capabilities'
-import CaseStudyShowcase from '@/components/home/CaseStudyShowcase'
-import StatsBanner from '@/components/home/StatsBanner'
-import Testimonials from '@/components/home/Testimonials'
-import HomeCTA from '@/components/home/HomeCTA'
-
-export const metadata: Metadata = {
-  title: 'TPG Fitness — Intelligent Gym Equipment',
-  description:
-    'A growing catalogue of intelligent gym equipment for serious facilities. Currently featuring The Smart Kiosk — biometric auth, AI workout plans, real-time muscle tracking, Telegram progress reports.',
-  openGraph: {
-    title: 'TPG Fitness — Intelligent Gym Equipment',
-    description:
-      'A catalogue of intelligent gym equipment, engineered for serious facilities. Featuring The Smart Kiosk.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
-  },
-}
+import { BootSequence } from '@/components/cinematic/BootSequence'
+import { Hero } from '@/components/cinematic/Hero'
+import { Problem } from '@/components/chapters/Problem'
+import { Ecosystem } from '@/components/chapters/Ecosystem'
+import { KioskShowcase } from '@/components/chapters/KioskShowcase'
+import { KioskFilm } from '@/components/chapters/KioskFilm'
+import { TMWShowcase } from '@/components/chapters/TMWShowcase'
+import { Narrative } from '@/components/chapters/Narrative'
+import { Network } from '@/components/chapters/Network'
+import { About } from '@/components/chapters/About'
+import { FinalCTA } from '@/components/chapters/FinalCTA'
 
 export default function HomePage() {
   return (
     <>
+      <BootSequence />
       <Hero />
-      <Catalogue />
-      <Capabilities />
-      <CaseStudyShowcase />
-      <StatsBanner />
-      <Testimonials />
-      <HomeCTA />
+      <Problem />
+      <Ecosystem />
+      <KioskShowcase />
+      <KioskFilm />
+      <TMWShowcase />
+      <Narrative />
+      <Network />
+      <About />
+      <FinalCTA />
     </>
   )
 }

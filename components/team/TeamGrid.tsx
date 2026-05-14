@@ -10,18 +10,21 @@ const team = [
     name: 'Ankit Khamitkar',
     role: 'Founder & CEO',
     bio: 'Started TPG to close the gap between gym tech that demos well and gym tech that survives a Tuesday at 6 PM. Drives product direction, partnerships, and the unreasonable belief that every member deserves a plan that actually fits.',
+    image: '/images/team/ankit.jpg',
   },
   {
     initials: 'AD',
     name: 'Atharva Dharmadhikari',
     role: 'Chief of Logistics, Finance & Onboarding',
     bio: 'Turns signed contracts into running kiosks on the gym floor. Owns vendor logistics, finances, and white-glove installation — has zero patience for missed deadlines and a notebook of suppliers everyone else has forgotten.',
+    image: '/images/team/d.jpeg',
   },
   {
     initials: 'AS',
     name: 'Atharva Supe',
     role: 'Chief Technical Officer',
     bio: 'Owns everything that has to keep working when the gym does. Architects the kiosk firmware, the QML UI stack, and the guard rails that catch the bugs that should never reach a member mid-set. Believes in shipping, then fixing the right things.',
+    image: '/images/team/supe.jpg',
   },
 ]
 

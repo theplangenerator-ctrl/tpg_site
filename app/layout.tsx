@@ -1,50 +1,41 @@
 import type { Metadata } from 'next'
-import { Barlow_Condensed, Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, JetBrains_Mono, Oswald } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/nav/Navbar'
-import Footer from '@/components/Footer'
-import MotionProvider from '@/components/MotionProvider'
-import ScrollProgress from '@/components/shared/ScrollProgress'
+import { TopFrame } from '@/components/layout/TopFrame'
+import { StatusRail } from '@/components/layout/StatusRail'
 
-const barlow = Barlow_Condensed({
+const display = Oswald({
   subsets: ['latin'],
-  weight: ['600', '700', '800', '900'],
-  variable: '--font-barlow',
+  weight: ['500', '600', '700'],
+  variable: '--font-display',
   display: 'swap',
 })
 
-const inter = Inter({
+const body = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+const mono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const space = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['500', '600'],
-  variable: '--font-space',
+  variable: '--font-mono',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'TPG Fitness — The Gym That Knows You',
-    template: '%s | TPG Fitness',
+    default: 'TPG — The Gym That Knows You',
+    template: '%s · TPG',
   },
   description:
-    'AI-powered gym kiosk systems with fingerprint auth, personalised workout plans, real-time muscle activation tracking, and Telegram progress reports. Built for serious gyms.',
+    'Fitness infrastructure for the modern era. An intelligent gym kiosk and a portable AI trainer — your gym, everywhere. Your data follows you.',
   openGraph: {
-    title: 'TPG Fitness — The Gym That Knows You',
-    description:
-      'AI-powered gym kiosk systems. Fingerprint auth, AI workout plans, real-time muscle tracking, Telegram progress bot.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    title: 'TPG — The Gym That Knows You',
+    description: 'Fitness infrastructure for the modern era.',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'TPG Fitness — The Gym That Knows You',
-    description: 'AI-powered gym kiosk systems for serious gyms.',
   },
 }
 
@@ -56,15 +47,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${barlow.variable} ${inter.variable} ${space.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <body>
-        <MotionProvider>
-          <ScrollProgress />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </MotionProvider>
+        <TopFrame />
+        <StatusRail />
+        <main>{children}</main>
       </body>
     </html>
   )

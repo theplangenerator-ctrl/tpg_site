@@ -20,9 +20,6 @@ export async function POST(request: NextRequest) {
       ...data,
     })
 
-    // Ready for Resend / SendGrid integration:
-    // await sendEmail({ to: 'hello@tpgfitness.com', ...data })
-
     return NextResponse.json({ success: true })
   } catch (error) {
     if (error instanceof z.ZodError) {

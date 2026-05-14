@@ -2,58 +2,80 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      black: '#0a0a0a',
-      red: {
-        DEFAULT: '#C41E1E',
-        hover: '#E02020',
+      paper: '#FFFFFF',
+      bone: '#F4F4F1',
+      fog: '#E8E8E4',
+      ash: '#C9C9C4',
+      steel: '#8A8A86',
+      graphite: {
+        50: '#9A9A95',
+        100: '#6B6B66',
+        200: '#3F3F3C',
+        300: '#252523',
+        400: '#161614',
+        500: '#0B0B0A',
       },
-      white: '#F5F5F5',
-      gray: {
-        dark: '#141414',
-        card: '#1c1c1c',
-        border: '#2a2a2a',
-        muted: '#6b6b6b',
+      signal: {
+        DEFAULT: '#D72323',
+        hot: '#FF2E2E',
+        deep: '#8A0F0F',
       },
     },
     fontFamily: {
-      barlow: ['var(--font-barlow)', 'sans-serif'],
-      inter: ['var(--font-inter)', 'sans-serif'],
-      space: ['var(--font-space)', 'sans-serif'],
+      display: ['var(--font-display)', 'Impact', 'sans-serif'],
+      body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+      mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
     },
     extend: {
       fontSize: {
-        'hero': 'clamp(3.5rem, 9vw, 9rem)',
-        'display': 'clamp(2.5rem, 6vw, 6rem)',
-        'heading': 'clamp(1.75rem, 4vw, 3rem)',
+        // Editorial scale — punchy on mobile, oversized on desktop
+        'colossal': 'clamp(4.75rem, 19vw, 22rem)',
+        'mega': 'clamp(4rem, 15vw, 16rem)',
+        'hero': 'clamp(3.25rem, 12vw, 10rem)',
+        'display': 'clamp(2.5rem, 8.5vw, 6rem)',
+        'h1': 'clamp(2rem, 5.5vw, 3.5rem)',
+        'label': '0.6875rem',
+        'micro': '0.625rem',
       },
       lineHeight: {
-        'hero': '0.95',
-        'tight': '1.05',
+        crush: '0.82',
+        tight: '0.95',
       },
       letterSpacing: {
-        'label': '0.08em',
-        'display': '-0.02em',
+        crush: '-0.04em',
+        editorial: '-0.025em',
+        label: '0.14em',
+        micro: '0.22em',
+      },
+      spacing: {
+        gutter: 'clamp(1.25rem, 3vw, 2.5rem)',
+        chapter: 'clamp(6rem, 14vh, 12rem)',
+      },
+      transitionTimingFunction: {
+        industrial: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+        mech: 'cubic-bezier(0.77, 0, 0.175, 1)',
       },
       animation: {
-        'pulse-slow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'draw': 'draw 1.5s ease forwards',
+        'scan-line': 'scan-line 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        'pulse-signal': 'pulse-signal 2.2s ease-in-out infinite',
       },
       keyframes: {
-        draw: {
-          from: { strokeDashoffset: '1000' },
-          to: { strokeDashoffset: '0' },
+        'scan-line': {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '20%, 80%': { opacity: '1' },
+          '100%': { transform: 'translateY(100%)', opacity: '0' },
         },
-      },
-      screens: {
-        'xs': '480px',
+        'pulse-signal': {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '1' },
+        },
       },
     },
   },

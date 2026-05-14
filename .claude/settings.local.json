@@ -2,7 +2,14 @@
   "permissions": {
     "allow": [
       "Bash(node *)",
-      "Bash(bun add *)"
+      "Bash(bun add *)",
+      "Bash(mkdir -p \"app/\\(legacy\\)/legacy/contact\" \"app/\\(legacy\\)/legacy/team\" \"app/\\(legacy\\)/legacy/api\")",
+      "Bash(git mv *)",
+      "Bash(rmdir app/contact app/team app/api)",
+      "Bash(npx tsc *)",
+      "Bash(mkdir -p /home/athu/projects/tpg_site/public/images/team)",
+      "Bash(cp /home/athu/projects/tpg_site/assets/ankit.jpg /home/athu/projects/tpg_site/assets/dharma.jpg /home/athu/projects/tpg_site/assets/supe.jpg /home/athu/projects/tpg_site/public/images/team/)",
+      "Bash(grep -rn \"text-signal\\\\|signal italic\\\\|signal\\\\s*$\\\\|stage.accent\\\\|signal'\" /home/athu/projects/tpg_site/components/chapters/)"
     ]
   }
 }

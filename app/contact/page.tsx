@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import ContactForm from '@/components/contact/ContactForm'
-import ContactDetails from '@/components/contact/ContactDetails'
-import ContactMap from '@/components/contact/ContactMap'
+
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const
+import ContactForm from '@/components/contact/ContactFormLight'
+import ContactDetails from '@/components/contact/ContactDetailsLight'
+import ContactMap from '@/components/contact/ContactMapLight'
 
 const faqs = [
   {
@@ -30,19 +32,19 @@ const faqs = [
   },
 ]
 
-function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
+function FAQItem({ item }: { item: typeof faqs[0] }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="border-b" style={{ borderColor: '#2a2a2a' }}>
+    <div className="border-b border-ash">
       <button
         className="w-full flex items-center justify-between gap-6 py-6 text-left group"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
         <span
-          className="font-barlow font-[700] uppercase tracking-tight text-white group-hover:text-red transition-colors duration-200"
-          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}
+          className="font-display text-graphite-500 group-hover:text-signal transition-colors duration-200"
+          style={{ fontSize: 'clamp(1rem, 2.4vw, 1.25rem)', lineHeight: 1.1 }}
         >
           {item.q}
         </span>
@@ -52,11 +54,10 @@ function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
           className="shrink-0"
           aria-hidden="true"
         >
-          <ChevronDown size={20} className="text-red" strokeWidth={2} />
+          <ChevronDown size={20} className="text-signal" strokeWidth={2} />
         </motion.div>
       </button>
 
-      {/* Animated height */}
       <motion.div
         initial={false}
         animate={{
@@ -67,7 +68,7 @@ function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
         style={{ overflow: 'hidden' }}
       >
         <div className="pb-6">
-          <p className="font-inter text-gray-muted text-sm leading-relaxed max-w-[70ch]">
+          <p className="font-body text-graphite-200 text-sm leading-relaxed max-w-[70ch]">
             {item.a}
           </p>
         </div>
@@ -77,55 +78,74 @@ function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
 }
 
 export default function ContactPage() {
+  const reduceMotion = useReducedMotion()
+  const rise = (delay: number) =>
+    reduceMotion
+      ? { initial: false, animate: { opacity: 1, y: 0 } }
+      : {
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.7, delay, ease: EASE_OUT_EXPO },
+        }
+
   return (
     <>
-      {/* Page header */}
-      <section
-        className="relative pt-40 pb-16 overflow-hidden"
-        style={{ background: '#0a0a0a' }}
-      >
+      <section className="relative pt-40 pb-16 overflow-hidden bg-bone">
         <div
           className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage: `repeating-linear-gradient(-6deg, transparent, transparent 60px, rgba(196,30,30,0.04) 60px, rgba(196,30,30,0.04) 61px)`,
+            backgroundImage: `repeating-linear-gradient(-6deg, transparent, transparent 60px, rgba(215,35,35,0.05) 60px, rgba(215,35,35,0.05) 61px)`,
           }}
           aria-hidden="true"
         />
-        <div className="relative max-w-7xl mx-auto px-6">
-          <p className="font-space text-xs text-red uppercase tracking-label font-semibold mb-5">
+        <div className="relative max-w-7xl mx-auto page-x">
+          <motion.p
+            {...rise(0)}
+            className="font-mono text-[0.6875rem] text-signal uppercase tracking-[0.22em] font-medium mb-5"
+          >
             Get In Touch
-          </p>
-          <h1
-            className="font-barlow font-[900] uppercase text-white leading-hero tracking-display mb-5"
+          </motion.p>
+          <motion.h1
+            {...rise(0.08)}
+            className="font-display text-graphite-500 mb-5"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)' }}
           >
-            Let's Talk.
-          </h1>
-          <p className="font-inter text-gray-muted text-lg leading-relaxed max-w-[55ch]">
+            Let&apos;s Talk.
+          </motion.h1>
+          <motion.p
+            {...rise(0.18)}
+            className="font-body text-graphite-200 text-lg leading-relaxed max-w-[55ch]"
+          >
             Whether you want a demo, a quote, or just want to know how the kiosk
             works — drop us a message.
-          </p>
+          </motion.p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <svg viewBox="0 0 1440 60" fill="none" className="w-full" preserveAspectRatio="none" height="60">
-            <polygon points="0,45 1440,10 1440,60 0,60" fill="#141414" />
+        <div
+          className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 1440 60"
+            fill="none"
+            className="w-full"
+            preserveAspectRatio="none"
+            height="60"
+          >
+            <polygon points="0,45 1440,10 1440,60 0,60" fill="#FFFFFF" />
           </svg>
         </div>
       </section>
 
-      {/* Form + Details split */}
-      <section className="py-24" style={{ background: '#141414' }}>
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-24 bg-paper">
+        <div className="max-w-7xl mx-auto page-x">
           <div className="grid grid-cols-1 lg:grid-cols-[55fr_45fr] gap-16 lg:gap-24">
-            {/* Left — Form */}
             <div>
-              <p className="font-space text-xs text-red uppercase tracking-label font-semibold mb-8">
+              <p className="font-mono text-[0.6875rem] text-signal uppercase tracking-[0.22em] font-medium mb-8">
                 Send a Message
               </p>
               <ContactForm />
             </div>
 
-            {/* Right — Details */}
             <div>
               <ContactDetails />
             </div>
@@ -133,31 +153,29 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map */}
-      <section className="py-0" style={{ background: '#141414' }}>
-        <div className="max-w-7xl mx-auto px-6 pb-16">
+      <section className="py-0 bg-paper">
+        <div className="max-w-7xl mx-auto page-x pb-16">
           <ContactMap />
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-24" style={{ background: '#0a0a0a' }}>
-        <div className="max-w-4xl mx-auto px-6">
+      <section className="py-24 bg-bone">
+        <div className="max-w-4xl mx-auto page-x">
           <div className="mb-12">
-            <p className="font-space text-xs text-red uppercase tracking-label font-semibold mb-4">
+            <p className="font-mono text-[0.6875rem] text-signal uppercase tracking-[0.22em] font-medium mb-4">
               FAQ
             </p>
             <h2
-              className="font-barlow font-[800] uppercase text-white leading-tight tracking-display"
+              className="font-display text-graphite-500"
               style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)' }}
             >
               Common Questions
             </h2>
           </div>
 
-          <div className="border-t" style={{ borderColor: '#2a2a2a' }}>
-            {faqs.map((item, i) => (
-              <FAQItem key={item.q} item={item} index={i} />
+          <div className="border-t border-ash">
+            {faqs.map((item) => (
+              <FAQItem key={item.q} item={item} />
             ))}
           </div>
         </div>
