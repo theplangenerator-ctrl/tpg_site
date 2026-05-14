@@ -41,7 +41,6 @@ export function KioskFilm() {
   }, [muted])
 
   useEffect(() => {
-    if (!showingVideo) return
     const v = videoRef.current
     if (!v) return
     const io = new IntersectionObserver(
@@ -56,7 +55,7 @@ export function KioskFilm() {
     )
     io.observe(v)
     return () => io.disconnect()
-  }, [showingVideo])
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -97,39 +96,32 @@ export function KioskFilm() {
               style={isMobile ? undefined : { y: lift }}
               className="relative aspect-video bg-graphite-500 border border-paper/15 overflow-hidden"
             >
+              {/* Video — always mounted so it keeps playing behind stills */}
+              <video
+                ref={videoRef}
+                src={VIDEO_SRC}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+
+              {/* Still overlay — fades in over the playing video */}
               <AnimatePresence mode="sync">
-                {showingVideo ? (
+                {!showingVideo && currentFrame && (
                   <motion.div
-                    key="video"
+                    key={currentFrame.src}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-                    className="absolute inset-0"
-                  >
-                    <video
-                      ref={videoRef}
-                      src={VIDEO_SRC}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key={currentFrame!.src}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
+                    transition={{ duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
                     className="absolute inset-0"
                   >
                     <Image
-                      src={currentFrame!.src}
-                      alt={`Kiosk frame ${frameLabel} — ${currentFrame!.code}`}
+                      src={currentFrame.src}
+                      alt={`Kiosk frame ${frameLabel} — ${currentFrame.code}`}
                       fill
                       sizes="(min-width: 768px) 66vw, 100vw"
                       className="object-cover"
