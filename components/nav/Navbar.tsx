@@ -73,7 +73,7 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid #2a2a2a' : '1px solid transparent',
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-0.5 shrink-0">
             <span className="font-barlow font-[800] text-2xl text-white tracking-tight">
@@ -150,7 +150,7 @@ export default function Navbar() {
             exit="closed"
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="flex-1 flex flex-col justify-center items-center gap-10 px-8">
+            <div className="flex-1 flex flex-col justify-center items-start gap-8 px-6">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.href}

@@ -30,7 +30,7 @@ export function Ecosystem() {
       </div>
 
       {/* Bus diagram */}
-      <div className="page-x mt-12 md:mt-20 grid-12 items-center">
+      <div className="page-x mt-8 md:mt-20 grid-12 items-center">
         {/* Left: Kiosk card */}
         <ProductCard
           number="01"

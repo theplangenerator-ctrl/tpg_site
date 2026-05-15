@@ -192,7 +192,7 @@ export default function Hero() {
       <div
         data-hero-parallax
         data-hero-fade
-        className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-24 w-full"
+        className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 pt-28 sm:pt-32 pb-24 w-full"
       >
         <div className="max-w-5xl">
           {/* Eyebrow */}
@@ -205,7 +205,7 @@ export default function Hero() {
           {/* Headline — each word in a mask */}
           <h1
             className="font-barlow font-[900] uppercase text-white leading-hero tracking-display mb-8"
-            style={{ fontSize: 'clamp(3.5rem, 9vw, 9rem)' }}
+            style={{ fontSize: 'clamp(5rem, 16vw, 9rem)' }}
           >
             {HEADLINE_LINES.map((line, lineIdx) => (
               <span key={lineIdx} className="block">
@@ -240,7 +240,7 @@ export default function Hero() {
           {/* Subheadline */}
           <p
             data-hero-sub
-            className="font-inter text-gray-muted text-lg leading-relaxed max-w-[600px] mb-10"
+            className="font-inter text-gray-muted text-base sm:text-lg leading-relaxed max-w-[600px] mb-10"
           >
             A growing catalogue of intelligent equipment for serious gyms.
             Engineered for the way modern members actually train —
@@ -248,17 +248,17 @@ export default function Hero() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4">
             <Link
               data-hero-cta
               href="/contact"
-              className="inline-flex items-center px-8 py-4 bg-red hover:bg-red-hover font-space font-semibold text-sm text-white uppercase tracking-label transition-colors duration-200"
+              className="inline-flex items-center justify-center sm:justify-start px-8 py-4 bg-red hover:bg-red-hover font-space font-semibold text-sm text-white uppercase tracking-label transition-colors duration-200"
             >
               Request a Demo
             </Link>
             <button
               data-hero-cta
-              className="inline-flex items-center gap-3 px-8 py-4 border font-space font-semibold text-sm text-white uppercase tracking-label hover:bg-white hover:text-black transition-colors duration-200"
+              className="inline-flex items-center justify-center sm:justify-start gap-3 px-8 py-4 border font-space font-semibold text-sm text-white uppercase tracking-label hover:bg-white hover:text-black transition-colors duration-200"
               style={{ borderColor: '#2a2a2a' }}
             >
               <Play size={14} strokeWidth={2} fill="currentColor" />

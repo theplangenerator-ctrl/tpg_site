@@ -108,7 +108,7 @@ export default function ContactPage() {
           <motion.h1
             {...rise(0.08)}
             className="font-display text-graphite-500 mb-5"
-            style={{ fontSize: 'clamp(3rem, 8vw, 8rem)' }}
+            style={{ fontSize: 'clamp(4.5rem, 16vw, 8rem)' }}
           >
             Let&apos;s Talk.
           </motion.h1>
@@ -167,7 +167,7 @@ export default function ContactPage() {
             </p>
             <h2
               className="font-display text-graphite-500"
-              style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 8vw, 3.5rem)' }}
             >
               Common Questions
             </h2>

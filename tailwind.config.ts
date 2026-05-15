@@ -36,11 +36,11 @@ const config: Config = {
     extend: {
       fontSize: {
         // Editorial scale — punchy on mobile, oversized on desktop
-        'colossal': 'clamp(4.75rem, 19vw, 22rem)',
-        'mega': 'clamp(4rem, 15vw, 16rem)',
-        'hero': 'clamp(3.25rem, 12vw, 10rem)',
-        'display': 'clamp(2.5rem, 8.5vw, 6rem)',
-        'h1': 'clamp(2rem, 5.5vw, 3.5rem)',
+        'colossal': 'clamp(5rem, 20vw, 22rem)',
+        'mega': 'clamp(4rem, 16vw, 16rem)',
+        'hero': 'clamp(4rem, 14vw, 10rem)',
+        'display': 'clamp(3.25rem, 11vw, 6rem)',
+        'h1': 'clamp(2.5rem, 9vw, 3.5rem)',
         'label': '0.6875rem',
         'micro': '0.625rem',
       },
@@ -56,7 +56,7 @@ const config: Config = {
       },
       spacing: {
         gutter: 'clamp(1.25rem, 3vw, 2.5rem)',
-        chapter: 'clamp(6rem, 14vh, 12rem)',
+        chapter: 'clamp(3.5rem, 10vh, 12rem)',
       },
       transitionTimingFunction: {
         industrial: 'cubic-bezier(0.2, 0.8, 0.2, 1)',

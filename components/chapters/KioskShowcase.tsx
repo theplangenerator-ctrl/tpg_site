@@ -49,7 +49,7 @@ export function KioskShowcase() {
       id="kiosk"
       className="relative bg-bone text-graphite-500 py-chapter overflow-hidden"
     >
-      <div className="page-x grid-12 mb-16">
+      <div className="page-x grid-12 mb-7 md:mb-16">
         <div className="col-span-12 md:col-span-3">
           <span className="label-mono block mb-3">04 · Product 01</span>
           <p className="text-sm text-graphite-200 max-w-[26ch]">

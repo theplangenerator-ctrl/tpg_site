@@ -39,7 +39,7 @@ export function TMWShowcase() {
         </div>
       </div>
 
-      <div className="page-x mt-12 md:mt-20 grid-12 items-center">
+      <div className="page-x mt-8 md:mt-20 grid-12 items-center">
         <div className="col-span-12 md:col-span-7 relative">
           <div className="relative aspect-[4/3] md:aspect-[16/10] bg-graphite-400 border border-paper/10">
             {/* Concentric rings */}

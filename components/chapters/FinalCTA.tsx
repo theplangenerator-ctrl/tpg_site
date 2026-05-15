@@ -29,7 +29,7 @@ export function FinalCTA() {
       </motion.div>
 
       <div className="page-x relative z-10">
-        <div className="flex items-center justify-between mb-10 md:mb-16">
+        <div className="flex items-center justify-between mb-7 md:mb-16">
           <span className="label-mono text-paper/60">09 · End sequence</span>
           <span className="label-mono text-signal animate-pulse-signal">
             TPG_OS · LIVE
@@ -47,7 +47,7 @@ export function FinalCTA() {
           <div className="text-signal italic">system.</div>
         </motion.h2>
 
-        <div className="mt-12 md:mt-16 grid grid-cols-12 gap-4 md:gap-6 items-end">
+        <div className="mt-8 md:mt-16 grid grid-cols-12 gap-4 md:gap-6 items-end">
           <p className="col-span-12 md:col-span-5 text-paper/70 max-w-[44ch] text-[0.95rem] md:text-base leading-snug">
             Gyms close. Trainers move on. Apps get shut down. The work you put
             in shouldn’t go with them.
@@ -61,7 +61,7 @@ export function FinalCTA() {
       </div>
 
       {/* Footer strip */}
-      <div className="page-x mt-20 md:mt-32 border-t border-paper/15 pt-6 flex flex-col md:flex-row md:flex-wrap md:items-center md:justify-between gap-3 md:gap-4 label-mono text-paper/60">
+      <div className="page-x mt-12 md:mt-32 border-t border-paper/15 pt-6 flex flex-col md:flex-row md:flex-wrap md:items-center md:justify-between gap-3 md:gap-4 label-mono text-paper/60">
         <span>© 2026 · TPG · The_Plan-Generator</span>
         <span>We are totally bootstrapped</span>
       </div>

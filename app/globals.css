@@ -80,8 +80,22 @@ a {
     font-family: var(--font-display), Impact, sans-serif;
     font-weight: 900;
     letter-spacing: -0.04em;
-    line-height: 0.82;
+    line-height: 0.88;
     text-transform: uppercase;
+  }
+  @media (min-width: 768px) {
+    .font-display {
+      line-height: 0.82;
+    }
+  }
+  /* Slight loosening on mobile so stacked display words don't overlap */
+  @media (max-width: 767px) {
+    .leading-crush {
+      line-height: 0.88 !important;
+    }
+    .leading-hero {
+      line-height: 0.92 !important;
+    }
   }
   .font-mono {
     font-family: var(--font-mono), ui-monospace, monospace;

@@ -71,7 +71,7 @@ export function KioskFilm() {
     >
       <div className="absolute inset-0 pointer-events-none opacity-[0.04] [background:repeating-linear-gradient(0deg,#fff_0,#fff_1px,transparent_1px,transparent_4px)]" />
 
-      <div className="page-x grid-12 mb-12 md:mb-16 relative">
+      <div className="page-x grid-12 mb-8 md:mb-16 relative">
         <div className="col-span-12 md:col-span-3">
           <span className="label-mono text-paper/60 block mb-3">GALLERY · KIOSK_01</span>
           <p className="text-sm text-paper/65 max-w-[26ch]">

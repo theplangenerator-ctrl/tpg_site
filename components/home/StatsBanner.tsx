@@ -85,7 +85,7 @@ export default function StatsBanner() {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
           {stats.map((stat) => (
             <div

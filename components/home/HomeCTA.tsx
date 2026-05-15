@@ -151,7 +151,7 @@ export default function HomeCTA() {
         </div>
       </div>
 
-      <div className="relative max-w-4xl mx-auto px-6 text-center">
+      <div className="relative max-w-4xl mx-auto px-5 sm:px-6 text-center">
         <p
           data-cta-fade
           className="font-space text-red text-xs font-semibold uppercase tracking-label mb-6"
@@ -161,7 +161,7 @@ export default function HomeCTA() {
 
         <h2
           className="font-barlow font-[900] uppercase text-white leading-[0.95] tracking-display mb-8"
-          style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+          style={{ fontSize: 'clamp(3.75rem, 11vw, 5rem)' }}
         >
           {headline.map((line, lineIdx) => (
             <span key={lineIdx} className="block">

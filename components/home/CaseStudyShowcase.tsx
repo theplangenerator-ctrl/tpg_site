@@ -64,7 +64,7 @@ export default function CaseStudyShowcase() {
         className="relative pt-32 pb-10"
         style={{ background: '#141414' }}
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div data-cs-fade className="mb-5">
             <SectionLabel>
               Deep Dives — {String(totalCount).padStart(2, '0')}
@@ -77,7 +77,7 @@ export default function CaseStudyShowcase() {
           >
             <h2
               className="font-barlow font-[800] uppercase text-white leading-[0.95] tracking-display"
-              style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)' }}
+              style={{ fontSize: 'clamp(3.25rem, 11vw, 4.5rem)' }}
             >
               Inside Each
               <br />

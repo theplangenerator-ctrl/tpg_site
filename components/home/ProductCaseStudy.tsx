@@ -148,11 +148,11 @@ export default function ProductCaseStudy({ product }: ProductCaseStudyProps) {
       </div>
 
       {/* Mobile header */}
-      <div className="lg:hidden px-6 pt-24 pb-12 max-w-7xl mx-auto">
+      <div className="lg:hidden px-5 pt-20 pb-8 max-w-7xl mx-auto">
         <SectionLabel>{caseStudy.eyebrow}</SectionLabel>
         <h2
           className="font-barlow font-[800] uppercase text-white leading-[0.95] tracking-display mt-3"
-          style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}
+          style={{ fontSize: 'clamp(3rem, 11vw, 4rem)' }}
         >
           {caseStudy.headline}
         </h2>
@@ -194,14 +194,14 @@ function Panel({ panel }: { panel: CaseStudyPanel }) {
   return (
     <article
       data-panel
-      className="relative w-full lg:w-screen lg:h-full shrink-0 flex items-center px-6 lg:px-12 py-24 lg:py-0"
+      className="relative w-full lg:w-screen lg:h-full shrink-0 flex items-center px-5 lg:px-12 py-14 lg:py-0 border-b border-[#1f1f1f] lg:border-0"
     >
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div className="lg:col-span-6 flex flex-col gap-6">
           <div data-panel-reveal className="flex items-baseline gap-5">
             <span
               className="font-barlow font-[900] text-red leading-none tracking-display"
-              style={{ fontSize: 'clamp(3rem, 7vw, 6rem)' }}
+              style={{ fontSize: 'clamp(4rem, 12vw, 6rem)' }}
             >
               {panel.number}
             </span>
@@ -213,7 +213,7 @@ function Panel({ panel }: { panel: CaseStudyPanel }) {
           <h3
             data-panel-reveal
             className="font-barlow font-[800] uppercase text-white leading-[0.95] tracking-display"
-            style={{ fontSize: 'clamp(2rem, 5.5vw, 5rem)' }}
+            style={{ fontSize: 'clamp(2.75rem, 9vw, 5rem)' }}
           >
             {panel.title}
           </h3>

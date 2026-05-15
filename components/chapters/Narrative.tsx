@@ -70,8 +70,8 @@ export function Narrative() {
     offset: ['start start', 'end end'],
   })
 
-  // Mobile uses a slightly taller scroll budget so each stage stays readable
-  const heightVh = isMobile ? 220 : 180
+  // Mobile uses a tighter scroll budget to avoid scroll fatigue — each stage still gets ~28vh of dwell
+  const heightVh = isMobile ? 140 : 180
 
   return (
     <section

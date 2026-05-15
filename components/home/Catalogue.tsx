@@ -80,7 +80,7 @@ export default function Catalogue() {
       className="relative py-32"
       style={{ background: '#0a0a0a' }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
         {/* Header */}
         <div
           data-cat-header
@@ -93,7 +93,7 @@ export default function Catalogue() {
             <h2
               data-reveal
               className="font-barlow font-[800] uppercase text-white leading-tight tracking-display"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)' }}
+              style={{ fontSize: 'clamp(3.75rem, 12vw, 5.5rem)' }}
             >
               Selected
               <br />
@@ -160,13 +160,13 @@ function CatalogueRow({ product }: { product: Product }) {
     <Wrapper
       {...wrapperProps}
       data-cat-row
-      className={`group relative grid grid-cols-12 gap-4 sm:gap-8 py-10 sm:py-14 border-b transition-colors duration-300 ${
+      className={`group relative flex flex-col sm:grid sm:grid-cols-12 gap-5 sm:gap-8 py-10 sm:py-14 border-b transition-colors duration-300 ${
         isAvailable ? '' : 'pointer-events-none'
       }`}
       style={{ borderColor: '#2a2a2a' }}
     >
-      {/* Left rail: number */}
-      <div className="col-span-2 sm:col-span-2 flex items-start">
+      {/* Left rail: number + mobile status */}
+      <div className="flex items-center justify-between sm:block sm:col-span-2">
         <span
           data-reveal
           data-cat-number
@@ -174,16 +174,37 @@ function CatalogueRow({ product }: { product: Product }) {
             isAvailable ? 'text-red' : ''
           }`}
           style={{
-            fontSize: 'clamp(2.25rem, 6vw, 5rem)',
+            fontSize: 'clamp(3.5rem, 14vw, 5rem)',
             color: isAvailable ? undefined : '#2a2a2a',
           }}
         >
           {product.number}
         </span>
+        <span className="sm:hidden">
+          {isAvailable ? (
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1.5 font-space text-[10px] font-semibold text-white uppercase tracking-label"
+              style={{ background: '#C41E1E' }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full bg-white animate-pulse-slow"
+                aria-hidden="true"
+              />
+              Available
+            </span>
+          ) : (
+            <span
+              className="inline-flex items-center gap-2 px-3 py-1.5 font-space text-[10px] font-semibold text-gray-muted uppercase tracking-label"
+              style={{ border: '1px solid #2a2a2a' }}
+            >
+              Coming Soon
+            </span>
+          )}
+        </span>
       </div>
 
       {/* Middle: name + category + tagline */}
-      <div className="col-span-10 sm:col-span-7 flex flex-col gap-3 sm:gap-4">
+      <div className="sm:col-span-7 flex flex-col gap-3 sm:gap-4">
         <div data-reveal>
           <span
             className="font-space text-[11px] uppercase tracking-label font-semibold"
@@ -199,7 +220,7 @@ function CatalogueRow({ product }: { product: Product }) {
             isAvailable ? 'text-white group-hover:text-red' : ''
           }`}
           style={{
-            fontSize: 'clamp(1.75rem, 4.5vw, 4rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 4rem)',
             color: isAvailable ? undefined : '#6b6b6b',
           }}
         >
@@ -213,6 +234,18 @@ function CatalogueRow({ product }: { product: Product }) {
         >
           {product.tagline}
         </p>
+
+        {isAvailable && (
+          <div
+            data-reveal
+            className="sm:hidden flex items-center gap-2 font-space text-xs font-semibold text-white uppercase tracking-label pt-1"
+          >
+            <span>View Case Study</span>
+            <span className="inline-flex">
+              <ArrowUpRight size={16} strokeWidth={2} />
+            </span>
+          </div>
+        )}
 
         {isAvailable && product.highlights && (
           <ul data-reveal className="hidden sm:flex flex-wrap gap-x-5 gap-y-1.5 mt-2">

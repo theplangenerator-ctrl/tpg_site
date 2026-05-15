@@ -36,7 +36,7 @@ export function Network() {
         </div>
       </div>
 
-      <div className="page-x mt-10 md:mt-16 grid-12">
+      <div className="page-x mt-7 md:mt-16 grid-12">
         <div className="col-span-12 md:col-span-8">
           <div className="relative aspect-[4/3] md:aspect-[16/10] bg-paper border border-graphite-500/15 overflow-hidden">
             <div className="absolute inset-0 blueprint opacity-50" />

@@ -53,7 +53,7 @@ export function Problem() {
 
       <motion.div
         style={isMobile ? undefined : { x: drift }}
-        className="mt-12 md:mt-20 page-x"
+        className="mt-8 md:mt-20 page-x"
       >
         <div className="grid-12 items-start">
           <div className="col-span-12 md:col-span-3 mb-6 md:mb-0">

@@ -231,7 +231,7 @@ export default function Capabilities() {
         </div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-6">
         {/* Eyebrow */}
         <div data-cap-fade className="mb-6">
           <SectionLabel>
@@ -243,7 +243,7 @@ export default function Capabilities() {
         <h2
           data-cap-heading
           className="font-barlow font-[900] uppercase text-white leading-[0.92] tracking-display mb-8"
-          style={{ fontSize: 'clamp(2.75rem, 10vw, 9rem)' }}
+          style={{ fontSize: 'clamp(4rem, 14vw, 9rem)' }}
         >
           {HEADING_LINES.map((line, lineIdx) => (
             <span key={lineIdx} className="block">
@@ -277,7 +277,7 @@ export default function Capabilities() {
           data-cap-fade
           data-cap-sub
           key={selected}
-          className="font-inter text-gray-muted text-lg max-w-[60ch] leading-relaxed mb-14"
+          className="font-inter text-gray-muted text-base sm:text-lg max-w-[60ch] leading-relaxed mb-12 sm:mb-14"
         >
           {subtitle}
         </p>
@@ -285,7 +285,7 @@ export default function Capabilities() {
         {/* Filter tabs */}
         <div
           data-cap-fade
-          className="mb-16 flex flex-wrap items-center"
+          className="mb-12 sm:mb-16 -mx-5 sm:mx-0 px-5 sm:px-0 flex flex-nowrap sm:flex-wrap items-center overflow-x-auto sm:overflow-visible scrollbar-none"
           style={{ borderBottom: '1px solid #2a2a2a' }}
         >
           {tabs.map((tab) => {
@@ -294,7 +294,7 @@ export default function Capabilities() {
               <button
                 key={tab.id}
                 onClick={() => setSelected(tab.id)}
-                className={`relative px-5 py-4 font-space text-xs font-semibold uppercase tracking-label transition-colors duration-200 ${
+                className={`relative shrink-0 px-4 sm:px-5 py-4 font-space text-xs font-semibold uppercase tracking-label transition-colors duration-200 ${
                   isActive
                     ? 'text-white'
                     : 'text-gray-muted hover:text-white'

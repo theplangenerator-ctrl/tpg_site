@@ -98,7 +98,7 @@ export default function Testimonials() {
       className="py-32"
       style={{ background: '#141414' }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
         {/* Header */}
         <div data-test-header className="mb-16">
           <div data-reveal className="mb-4">
@@ -107,7 +107,7 @@ export default function Testimonials() {
           <h2
             data-reveal
             className="font-barlow font-[800] uppercase text-white leading-tight tracking-display"
-            style={{ fontSize: 'clamp(2rem, 5vw, 4.5rem)' }}
+            style={{ fontSize: 'clamp(3.25rem, 11vw, 4.5rem)' }}
           >
             What Gym
             <br />

@@ -63,7 +63,7 @@ export function About() {
         </div>
       </div>
 
-      <div className="page-x mt-12 md:mt-20 grid-12 gap-y-8 md:gap-y-0">
+      <div className="page-x mt-8 md:mt-20 grid-12 gap-y-8 md:gap-y-0">
         {TEAM.map((p, i) => (
           <motion.figure
             key={p.name}
@@ -105,7 +105,7 @@ export function About() {
         ))}
       </div>
 
-      <div className="page-x mt-16 md:mt-24 hairline-t pt-6 flex flex-col md:flex-row md:flex-wrap md:items-baseline md:justify-between gap-3 md:gap-4">
+      <div className="page-x mt-10 md:mt-24 hairline-t pt-6 flex flex-col md:flex-row md:flex-wrap md:items-baseline md:justify-between gap-3 md:gap-4">
         <span className="font-display text-h1 uppercase tracking-editorial">
           We’re just getting started.
         </span>
