@@ -28,7 +28,7 @@ const errorClass = 'font-body text-signal text-xs mt-1.5'
 const labelClass =
   'font-mono text-[0.6875rem] text-graphite-300 uppercase tracking-[0.18em] font-medium block mb-2'
 
-export default function ContactFormLight() {
+export default function ContactFormLight({ defaultMessage = '' }: { defaultMessage?: string }) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   const {
@@ -38,6 +38,7 @@ export default function ContactFormLight() {
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: { message: defaultMessage },
   })
 
   const onSubmit = async (data: FormData) => {
@@ -271,7 +272,10 @@ export default function ContactFormLight() {
 
             {status === 'error' && (
               <p className="font-body text-signal text-sm" role="alert">
-                Something went wrong. Please try again or email us directly.
+                Something went wrong. Please try again or email us directly at{' '}
+                <a href="mailto:contact@tpgfitness.com" className="underline underline-offset-2">
+                  contact@tpgfitness.com
+                </a>
               </p>
             )}
 

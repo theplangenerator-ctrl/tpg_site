@@ -79,14 +79,14 @@ export function Hero() {
           transition={{ duration: 1.0, delay: 1.05, ease: [0.2, 0.8, 0.2, 1] }}
           className="flex flex-col gap-3 w-full"
         >
-          <CTAPrimary href="#network" full>Enter the future</CTAPrimary>
+          <CTAPrimary href="/contact" full>Enter the future</CTAPrimary>
           <CTAGhost href="#kiosk" full>Watch system</CTAGhost>
         </motion.div>
 
         {/* Mobile telemetry — single row, scrolls hint */}
         <div className="grid grid-cols-2 gap-3 pt-6 border-t border-graphite-500/15">
           <MobileTelemetry k="Build" v="v0.1" />
-          <MobileTelemetry k="Network" v="Live" />
+          <MobileTelemetry k="Network" v="2026" />
           <MobileTelemetry k="Status" v="Onboarding" />
           <MobileTelemetry k="↓" v="Begin sequence" />
         </div>
@@ -143,7 +143,7 @@ export function Hero() {
           transition={{ duration: 1.0, delay: 1.3, ease: [0.2, 0.8, 0.2, 1] }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <CTAPrimary href="#network">Enter the future</CTAPrimary>
+          <CTAPrimary href="/contact">Enter the future</CTAPrimary>
           <CTAGhost href="#kiosk">Watch system</CTAGhost>
         </motion.div>
       </motion.div>
@@ -154,9 +154,9 @@ export function Hero() {
         className="hidden md:block absolute bottom-0 inset-x-0 hairline-t bg-bone/70 backdrop-blur-[2px]"
       >
         <div className="page-x py-3 grid grid-cols-4 gap-4 label-mono">
-          <Telemetry k="Build" v="v0.1 · MUM" />
+          <Telemetry k="Build" v="v0.1 · NANDED" />
           <Telemetry k="Members" v="Onboarding" />
-          <Telemetry k="Network" v="Live · 1 node" />
+          <Telemetry k="Network" v="Planned · 2026" />
           <Telemetry k="Scroll" v="↓ Begin sequence" />
         </div>
       </motion.div>

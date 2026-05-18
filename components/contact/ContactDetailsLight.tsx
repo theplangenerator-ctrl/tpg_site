@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send, Instagram, Github } from 'lucide-react'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
 function WhatsApp({ size = 16 }: { size?: number }) {
   return (
@@ -12,7 +12,7 @@ const details = [
   {
     icon: Mail,
     label: 'General Enquiries',
-    value: 'theplangenerator@gmail.com',
+    value: 'contact@tpgfitness.com',
     sub: null,
   },
   {
@@ -30,7 +30,7 @@ const details = [
   {
     icon: MapPin,
     label: 'Headquarters',
-    value: '4 Chetan Nagar, Nanded City, Maharashtra, India',
+    value: 'Nanded, Maharashtra, India',
     sub: null,
   },
   {
@@ -42,10 +42,8 @@ const details = [
 ]
 
 const socials = [
-  { label: 'Instagram', handle: '@tpgfitness', icon: Instagram, href: '#' },
-  { label: 'WhatsApp', handle: '+91 81498 88054', icon: WhatsApp, href: '#' },
-  { label: 'Telegram', handle: '@TPGFitnessSupport', icon: Send, href: '#' },
-  { label: 'GitHub', handle: 'tpg-fitness', icon: Github, href: '#' },
+  { label: 'WhatsApp', handle: '+91 81498 88054', icon: WhatsApp, href: 'https://wa.me/918149888054' },
+  { label: 'Telegram', handle: '@TPGFitnessSupport', icon: Send, href: 'https://t.me/TPGFitnessSupport' },
 ]
 
 export default function ContactDetailsLight() {

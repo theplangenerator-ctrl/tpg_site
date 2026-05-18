@@ -7,22 +7,22 @@ import { MaskedReveal } from '@/components/motion/MaskedReveal'
 const TEAM = [
   {
     name: 'Ankit Khamitkar',
-    role: 'Founder · Product Mind',
-    bio: 'Founder & Product Mind',
+    role: 'The Guy Who Makes It Work',
+    credential: 'Founder · Electronics & Telecom Engineering · Competitive Powerlifter',
     monogram: 'AK',
     image: '/images/team/ankit.jpg',
   },
   {
     name: 'Atharva Supe',
     role: 'The Guy Who Makes It Work',
-    bio: 'The Guy Who Makes It Work',
+    credential: 'Full-Stack & Systems Development',
     monogram: 'AS',
     image: '/images/team/supe.jpg',
   },
   {
     name: 'Atharva Dharmadhikari',
     role: 'The One Who Keeps It Real',
-    bio: 'The One Who Keeps It Real',
+    credential: 'Operations & Finance',
     monogram: 'AD',
     image: '/images/team/d.jpeg',
   },
@@ -44,15 +44,15 @@ export function About() {
         </div>
         <div className="col-span-12 md:col-span-9">
           <h2 className="font-display text-display md:text-hero leading-crush tracking-crush uppercase">
-            <div><MaskedReveal>Just some guys</MaskedReveal></div>
+            <div><MaskedReveal>Built by</MaskedReveal></div>
             <div className="opacity-60">
-              <MaskedReveal delay={0.12}>trying to contribute</MaskedReveal>
+              <MaskedReveal delay={0.12}>athletes,</MaskedReveal>
             </div>
             <div>
-              <MaskedReveal delay={0.24}>to the gym</MaskedReveal>
+              <MaskedReveal delay={0.24}>for gym</MaskedReveal>
             </div>
             <div className="text-signal italic text-hero md:text-mega leading-crush">
-              <MaskedReveal delay={0.36}>culture.</MaskedReveal>
+              <MaskedReveal delay={0.36}>operators.</MaskedReveal>
             </div>
           </h2>
 
@@ -97,8 +97,8 @@ export function About() {
                 {p.name}
               </p>
               <p className="label-mono mt-1">{p.role}</p>
-              <p className="text-[0.9rem] md:text-sm text-graphite-200 mt-2 md:mt-3 max-w-[36ch] leading-snug">
-                {p.bio}
+              <p className="text-[0.8rem] md:text-xs text-graphite-100 mt-1.5 max-w-[36ch] leading-snug">
+                {p.credential}
               </p>
             </figcaption>
           </motion.figure>
@@ -109,7 +109,7 @@ export function About() {
         <span className="font-display text-h1 uppercase tracking-editorial">
           We’re just getting started.
         </span>
-        <span className="label-mono text-steel">EST · 2025 · MUM</span>
+        <span className="label-mono text-steel">EST · 2025 · NANDED</span>
       </div>
     </section>
   )

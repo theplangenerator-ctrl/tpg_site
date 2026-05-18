@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
@@ -9,10 +10,16 @@ import ContactForm from '@/components/contact/ContactFormLight'
 import ContactDetails from '@/components/contact/ContactDetailsLight'
 import ContactMap from '@/components/contact/ContactMapLight'
 
+const INTENT_MESSAGES: Record<string, string> = {
+  demo: "Hi, I'd like to request a demo of the All_X2 kiosk for my gym.",
+  partner: "Hi, I'm interested in joining the TPG network as a partner gym.",
+  pricing: "Hi, I'd like to discuss pricing options for the All_X2 kiosk.",
+}
+
 const faqs = [
   {
     q: 'How long does installation take?',
-    a: 'A standard single-kiosk installation takes one working day — site survey, mounting, cabling, software setup, and member fingerprint enrollment. Multi-kiosk installs are scheduled over 2–3 days.',
+    a: 'A standard single-kiosk installation takes one working day — site survey, mounting, cabling, software setup, and member fingerprint enrollment. Installation timelines for multi-kiosk setups are confirmed per project based on kiosk count and site readiness.',
   },
   {
     q: 'Does it work with our existing gym management software?',
@@ -20,7 +27,7 @@ const faqs = [
   },
   {
     q: 'What happens if the fingerprint sensor fails?',
-    a: 'Each kiosk ships with a backup sensor and a PIN-based fallback. Our hardware team ships a replacement unit within 48 hours. Downtime has averaged under 2 hours across all deployments.',
+    a: 'Each kiosk ships with a backup sensor and a PIN-based fallback. We provide remote diagnostics and on-site support. Replacement and repair timelines are agreed during onboarding based on your location. The system is designed for under 2 hours recovery time in the event of hardware or network failure.',
   },
   {
     q: 'Can the kiosk run offline?',
@@ -28,7 +35,7 @@ const faqs = [
   },
   {
     q: 'How is member data protected?',
-    a: 'Fingerprint data is stored as encrypted templates on-device only — never transmitted to our servers. Member workout data is encrypted in transit and at rest. We are GDPR-compliant and can provide a full data processing agreement on request.',
+    a: "Fingerprint data is stored as encrypted templates on-device only — never transmitted to our servers. Member biometric data never leaves the kiosk. Workout data is encrypted in transit and at rest, in compliance with India's DPDP Act 2023. We can provide a full data processing agreement on request.",
   },
 ]
 
@@ -75,6 +82,13 @@ function FAQItem({ item }: { item: typeof faqs[0] }) {
       </motion.div>
     </div>
   )
+}
+
+function ContactFormSection() {
+  const searchParams = useSearchParams()
+  const intent = searchParams.get('intent') ?? ''
+  const defaultMessage = INTENT_MESSAGES[intent] ?? ''
+  return <ContactForm defaultMessage={defaultMessage} />
 }
 
 export default function ContactPage() {
@@ -143,7 +157,9 @@ export default function ContactPage() {
               <p className="font-mono text-[0.6875rem] text-signal uppercase tracking-[0.22em] font-medium mb-8">
                 Send a Message
               </p>
-              <ContactForm />
+              <Suspense fallback={<ContactForm />}>
+                <ContactFormSection />
+              </Suspense>
             </div>
 
             <div>

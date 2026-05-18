@@ -26,8 +26,12 @@ export function TMWShowcase() {
       <div className="page-x grid-12 relative">
         <div className="col-span-12 md:col-span-3">
           <span className="label-mono text-paper/60 block mb-3">05 · Product 02</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-signal/60 mb-3">
+            <span className="w-1.5 h-1.5 bg-signal" />
+            <span className="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-signal">In Development</span>
+          </div>
           <p className="text-sm text-paper/65 max-w-[26ch]">
-            Smaller than a phone. Smarter than a coach. Lives in your pocket.
+            Currently in firmware development. Sign up to be notified at launch.
           </p>
         </div>
         <div className="col-span-12 md:col-span-9">
@@ -72,10 +76,10 @@ export function TMWShowcase() {
 
         <ul className="col-span-12 md:col-span-5 md:pl-8 mt-8 md:mt-0 space-y-4 md:space-y-5">
           {[
-            ['01', 'Voice + haptic', 'Tells you the next set. Feels it before you do.'],
+            ['01', 'Voice + haptic', 'Tells you the next set. Provides rep and rest cues through haptic feedback.'],
             ['02', 'Magnetic dock', 'Snaps to the kiosk. Charges. Hands off the session.'],
-            ['03', 'Cross-gym sync', 'Walk into any TPG floor. Your data is already there.'],
-            ['04', 'No app required', 'It is the app.'],
+            ['03', 'Cross-gym sync', 'Designed to carry your workout history across every TPG-enabled gym.'],
+            ['04', 'No app required', 'The device is the interface.'],
           ].map(([n, t, b]) => (
             <li key={n} className="border-t border-paper/15 pt-3 md:pt-4 flex items-baseline gap-4 md:gap-5">
               <span className="label-mono text-signal w-7 md:w-8 shrink-0">{n}</span>

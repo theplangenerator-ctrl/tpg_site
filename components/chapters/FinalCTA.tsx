@@ -54,8 +54,8 @@ export function FinalCTA() {
           </p>
 
           <div className="col-span-12 md:col-span-7 flex flex-col md:flex-row md:flex-wrap items-stretch md:items-center justify-start md:justify-end gap-3 md:gap-4">
-            <CTAFilled href="#">Request demo</CTAFilled>
-            <CTAGhostDark href="#">Join the network</CTAGhostDark>
+            <CTAFilled href="/contact?intent=demo">Request demo</CTAFilled>
+            <CTAGhostDark href="/contact?intent=partner">Join the network</CTAGhostDark>
           </div>
         </div>
       </div>
